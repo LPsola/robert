@@ -14,13 +14,13 @@ const Login: React.FC<LoginProps> = ({ setLoggedInUser }) => {
 
   return (
     <div>
-      <AuthenticationForm
-        action={login}
-        callToAction="Login"
-        secondaryActionLabel="Sign up"
-        secondaryActionLink="/signup"
-        secondaryActionQuestion="Don't have an account yet? "
-      />
+          <AuthenticationForm
+            action={login}
+            callToAction="Login"
+            secondaryActionLabel="Sign up"
+            secondaryActionLink="/signup"
+            secondaryActionQuestion="Don't have an account yet? "
+          />
     </div>
   );
 

@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {Link, RouteComponentProps} from "@reach/router";
 import {makeStyles} from "@material-ui/core/styles";
-import {Button, TextField} from "@material-ui/core";
+import {Button, Card, TextField} from "@material-ui/core";
 import {size} from "../../../helpers/styling/sizes";
 
 interface AuthenticationFormProps extends RouteComponentProps {
@@ -16,8 +16,12 @@ const useStyles = makeStyles(() => ({
   container: {
     display: "flex",
     flexDirection: "column",
+    paddingTop: size(1),
+    paddingBottom: size(1),
+    paddingLeft: size(2),
+    paddingRight: size(2),
     marginLeft: size(4),
-    marginRight: size(4),
+    marginRight: size(4)
   },
   form: {
     display: "flex",
@@ -41,7 +45,7 @@ const AuthenticationForm: React.FC<AuthenticationFormProps> = ({
   const classes = useStyles();
 
   return (
-    <div className={classes.container}>
+    <Card className={classes.container}>
       <form className={classes.form} onSubmit={(e) => handleFormSubmit(e)}>
         <TextField
           className={classes.field}
@@ -68,7 +72,7 @@ const AuthenticationForm: React.FC<AuthenticationFormProps> = ({
         <span>{secondaryActionQuestion}</span>
         <Link to={secondaryActionLink}>{secondaryActionLabel}</Link>
       </div>
-    </div>
+    </Card>
   );
 
   function handleFormSubmit(event: React.FormEvent<HTMLFormElement>) {
