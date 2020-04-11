@@ -31,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
     color: "inherit",
   },
   logo: {
+    marginLeft: '10px',
     width: "100%",
     height: "100%",
   },

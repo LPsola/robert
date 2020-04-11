@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const Order = require("./Order")
+const CareGiver = require("./CareGiver")
 
 const careReceiverSchema = new Schema({
   orders: [{ type: Schema.Types.ObjectId, ref: "Order" }],
@@ -7,10 +9,6 @@ const careReceiverSchema = new Schema({
   emergencyContact: String,
   preferredShoppingPlaces: [String],
   spokenLanguage: String,
-  vulnerability: {
-    type: String,
-    enum: ["SENIOR", "SICK", "PREGNANT", "REDUCED_MOBILITY", "BLIND", "OTHER"],
-  },
 });
 
 const CareReceiver = mongoose.model("CareReceiver", careReceiverSchema);

@@ -54,4 +54,7 @@ app.use(cors({
 const authRoutes = require('./routes/auth');
 app.use('/api/auth', authRoutes);
 
+const receiverRoutes = require('./routes/receiver');
+app.use('/api/receiver', receiverRoutes);
+
 module.exports = app;

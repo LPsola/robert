@@ -7,6 +7,7 @@ import AuthService from "./services/authentication";
 import Login from "./components/feature/authentication/Login";
 import MainContentWrapper from "./components/ui/core/MainContentWrapper";
 import Home from "./components/ui/Home";
+import CreateOrder from "./components/ui/CreateOrder";
 
 function App() {
   const [loggedUser, setLoggedUser] = useState(new User());
@@ -21,9 +22,10 @@ function App() {
       <NavBar setUser={setUser} username={loggedUser.username} />
       <MainContentWrapper>
         <Router>
-          <Home path="/" />
+          <Home loggedUser={loggedUser} path="/" />
           <SignUp path="/signup" setSignedUpUser={setUser} />
           <Login path="/login" setLoggedInUser={setUser} />
+          <CreateOrder path="/create" user={loggedUser} />
         </Router>
       </MainContentWrapper>
     </div>
