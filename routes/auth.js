@@ -2,6 +2,7 @@ const express = require("express");
 const passport = require('passport');
 const router = express.Router();
 const User = require("../models/User");
+const CareReceiver = require("../models/CareReceiver");
 
 // Bcrypt to encrypt passwords
 const bcrypt = require("bcrypt");
@@ -40,18 +41,27 @@ router.post('/login', (req, res, next) => {
 
 router.post('/signup', (req, res, next) => {
   const username = req.body.username;
+  const firstname = req.body.firstname;
+  const lastname = req.body.lastname;
   const password = req.body.password;
+  const email = req.body.email;
+  const phone_number = req.body.phone_number;
+  const role = req.body.role;
 
-  if (!username || !password) {
+  if (!username || !password || !firstname || !lastname) {
     res.status(400).json({ message: 'Provide username and password' });
     return;
   }
+ /*
+  if (!username || !password) {
+    res.status(400).json({ message: 'Provide username and password' });
+    return;
+  }*/
 
   // if(password.length < 7){
   //   res.status(400).json({ message: 'Please make your password at least 8 characters long for security purposes.' });
   //   return;
   // }
-
   User.findOne({ username }, (err, foundUser) => {
 
     if(err){
@@ -69,9 +79,13 @@ router.post('/signup', (req, res, next) => {
 
     const newuser = new User({
       username:username,
-      password: hashPass
+      firstName: firstname,
+      lastName: lastname,
+      email: email,
+      phoneNumber: phone_number,
+      password: hashPass,
+      role: role
     });
-
     newuser.save(err => {
       if (err) {
         res.status(400).json({ message: 'Saving user to database went wrong.' });
@@ -94,7 +108,40 @@ router.post('/signup', (req, res, next) => {
     });
   });
 });
+router.post('/confirm', (req, res, next) => {
+  User.findById(req.body.id, function(err, user) {
+    if (err){
+      res.status(404).json({ message: 'User not find' });
+    }else{
 
+      //Create CareRceiver according user connected
+      var careReceiver = new CareReceiver();
+      careReceiver.vulnerability = req.body.vulnerability;
+
+      //Nous stockons l'objet en base
+      careReceiver.save(function(err){
+        if(err){
+          res.send(err);
+        }
+        //Update user with address information
+        let  address = {
+          city: req.body.city,
+          street: req.body.street,
+          streetNumber: req.body.street_number,
+          country: req.body.country,
+          latitude: req.body.latitude,
+          longitude: req.body.longitude
+        };
+
+        user.address = address;
+        user.careReceiverId = careReceiver.id;
+        res.status(200).json({ message: user });
+      })
+    }
+
+
+  });
+});
 
 router.post("/logout", (req, res) => {
   req.logout();
