@@ -4,7 +4,7 @@ import {User} from "../../../models";
 import AuthService from "../../../services/authentication";
 import {makeStyles} from "@material-ui/core/styles";
 import {size} from "../../../helpers/styling/sizes";
-import {Button, Card, TextField} from "@material-ui/core";
+import {Button, Card, CardHeader, TextField} from "@material-ui/core";
 
 interface SignupProps extends RouteComponentProps {
   setSignedUpUser: (user: User) => void;
@@ -14,8 +14,6 @@ const useStyles = makeStyles(() => ({
   container: {
     display: "flex",
     flexDirection: "column",
-    paddingTop: size(1),
-    paddingBottom: size(1),
     paddingLeft: size(2),
     paddingRight: size(2),
     marginLeft: size(4),
@@ -25,15 +23,21 @@ const useStyles = makeStyles(() => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    height: size(8),
+    justifyContent: 'space-evenly'
   },
   field: {
     width: "100%",
+
   },
   action: {
     marginTop: size(1),
     backgroundColor: "#94CBEA",
     color: "white",
   },
+  header: {
+    textAlign: 'center',
+  }
 }));
 
 const SignUp: React.FC<SignupProps> = ({ setSignedUpUser, location }) => {
@@ -53,6 +57,7 @@ const SignUp: React.FC<SignupProps> = ({ setSignedUpUser, location }) => {
 
   return (
       <Card className={classes.container}>
+        <CardHeader className={classes.header} title="Créer un compte" />
         <form className={classes.form} onSubmit={(e) => handleFormSubmit(e)}>
           <TextField
               className={classes.field}
@@ -60,6 +65,7 @@ const SignUp: React.FC<SignupProps> = ({ setSignedUpUser, location }) => {
               label="Prénom"
               name="firstName"
               value={userForm.firstName}
+              variant="filled"
               onChange={handleFormValueChange}
           />
           <TextField
@@ -68,6 +74,7 @@ const SignUp: React.FC<SignupProps> = ({ setSignedUpUser, location }) => {
               label="Nom"
               name="lastName"
               value={userForm.lastName}
+              variant="filled"
               onChange={handleFormValueChange}
           />
           <TextField
@@ -75,7 +82,9 @@ const SignUp: React.FC<SignupProps> = ({ setSignedUpUser, location }) => {
               required
               label="e-mail"
               name="email"
+              type="email"
               value={userForm.email}
+              variant="filled"
               onChange={handleFormValueChange}
           />
           <TextField
@@ -84,6 +93,7 @@ const SignUp: React.FC<SignupProps> = ({ setSignedUpUser, location }) => {
               label="Pseudo"
               name="username"
               value={userForm.username}
+              variant="filled"
               onChange={handleFormValueChange}
           />
           <TextField
@@ -92,6 +102,7 @@ const SignUp: React.FC<SignupProps> = ({ setSignedUpUser, location }) => {
               type="password"
               name="password"
               autoComplete="current-password"
+              variant="filled"
               onChange={handleFormValueChange}
           />
           <Button
@@ -100,7 +111,7 @@ const SignUp: React.FC<SignupProps> = ({ setSignedUpUser, location }) => {
               variant="contained"
               type="submit"
           >
-            Créer son compte
+            Créer
           </Button>
         </form>
       </Card>

@@ -4,7 +4,7 @@ import {RouteComponentProps, useNavigate} from "@reach/router";
 import {User} from "../../../models";
 import {makeStyles} from "@material-ui/core/styles";
 import {size} from "../../../helpers/styling/sizes";
-import {Button, Card, TextField} from "@material-ui/core";
+import {Button, Card, CardHeader, TextField} from "@material-ui/core";
 
 interface LoginProps extends RouteComponentProps {
   setLoggedInUser: (user: User) => void;
@@ -25,6 +25,8 @@ const useStyles = makeStyles(() => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    height: size(4),
+    justifyContent: 'space-evenly'
   },
   field: {
     width: "100%",
@@ -34,6 +36,9 @@ const useStyles = makeStyles(() => ({
     backgroundColor: "#94CBEA",
     color: "white",
   },
+  header: {
+    textAlign: 'center'
+  }
 }));
 const Login: React.FC<LoginProps> = ({ setLoggedInUser }) => {
   const authService = new AuthService();
@@ -50,6 +55,7 @@ const Login: React.FC<LoginProps> = ({ setLoggedInUser }) => {
 
   return (
     <Card className={classes.container}>
+      <CardHeader className={classes.header} title="Connexion" />
       <form className={classes.form} onSubmit={(e) => handleFormSubmit(e)}>
         <TextField
           className={classes.field}
