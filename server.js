@@ -13,7 +13,7 @@ const MongoStore = require('connect-mongo')(session);
 
 
 mongoose
-  .connect('mongodb://localhost/robert', {useNewUrlParser: true})
+  .connect('mongodb://localhost/robert', {useNewUrlParser: true, useUnifiedTopology:true})
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
@@ -53,5 +53,8 @@ app.use(cors({
 
 const authRoutes = require('./routes/auth');
 app.use('/api/auth', authRoutes);
+
+const receiverRoutes = require('./routes/receiver');
+app.use('/api/receiver', receiverRoutes);
 
 module.exports = app;
