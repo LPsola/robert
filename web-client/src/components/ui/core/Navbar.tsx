@@ -3,8 +3,9 @@ import {Link, RouteComponentProps} from "@reach/router";
 import AuthService from "../../../services/authentication";
 import {User} from "../../../models";
 import {AppBar, Button, IconButton, Toolbar, Typography,} from "@material-ui/core";
-import MenuIcon from "@material-ui/icons/Menu";
 import {makeStyles} from "@material-ui/core/styles";
+import logo from "../../../assets/logo.png";
+import {size} from "../../../helpers/styling/sizes";
 
 interface NavbarProps extends RouteComponentProps {
   username: string;
@@ -12,6 +13,9 @@ interface NavbarProps extends RouteComponentProps {
 }
 
 const useStyles = makeStyles((theme) => ({
+  navBar: {
+    backgroundColor: "#94CBEA",
+  },
   root: {
     flexGrow: 1,
   },
@@ -19,12 +23,24 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
   },
   title: {
-    textAlign: 'center',
+    textAlign: "center",
     flexGrow: 1,
   },
   link: {
     textDecoration: "none",
     color: "inherit",
+  },
+  logo: {
+    width: "100%",
+    height: "100%",
+  },
+  logoWrapper: {
+    width: size(2),
+    height: "auto",
+  },
+  logoButton: {
+    padding: 0,
+    borderRadius: 0,
   },
 }));
 
@@ -34,35 +50,27 @@ const NavBar: React.FC<NavbarProps> = ({ username, setUser }) => {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar className={classes.navBar} position="static">
         <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="menu"
-          >
-            <MenuIcon />
+          <IconButton className={classes.logoButton} edge="start">
+            <div className={classes.logoWrapper}>
+              <Link to="/">
+                <img className={classes.logo} src={logo} alt=""/>
+              </Link>
+            </div>
           </IconButton>
-          <Typography variant="h5" className={classes.title}>
-            <Link to="/" className={classes.link}>
-              Robert
-            </Link>
-          </Typography>
+          <Typography variant="h5" className={classes.title}></Typography>
           {username ? (
             <Fragment>
-              <Button onClick={logout} color="inherit">Logout</Button>
+              <Button onClick={logout} color="inherit">
+                Déconnexion
+              </Button>
             </Fragment>
           ) : (
             <Fragment>
               <Button color="inherit">
                 <Link to="/login" className={classes.link}>
-                  Login
-                </Link>
-              </Button>
-              <Button color="inherit">
-                <Link to="/signup" className={classes.link}>
-                  Sign up
+                  Se connecter
                 </Link>
               </Button>
             </Fragment>
@@ -71,7 +79,6 @@ const NavBar: React.FC<NavbarProps> = ({ username, setUser }) => {
       </AppBar>
     </div>
   );
-
 
   function logout() {
     authService.logout().then(() => setUser(new User({ id: "" })));

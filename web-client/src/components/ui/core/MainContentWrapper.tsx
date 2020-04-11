@@ -9,7 +9,9 @@ interface MainContentWrapperProps extends RouteComponentProps {
 
 const useStyles = makeStyles(() => ({
   root: {
-    padding: size(1),
+    paddingTop: size(1),
+    paddingLeft: size(1),
+    paddingRight: size(1),
   },
 }));
 

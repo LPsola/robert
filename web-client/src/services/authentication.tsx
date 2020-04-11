@@ -20,9 +20,9 @@ class AuthService {
     return this.http.post("/logout");
   }
 
-  signup(username: string, password: string): Promise<User> {
+  signup(user: User): Promise<User> {
     return this.http
-      .post("/signup", { username, password })
+      .post("/signup", { user })
       .then((response) => new User(response.data));
   }
 
