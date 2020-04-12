@@ -6,6 +6,7 @@ import {Button, Typography} from "@material-ui/core";
 import {size} from "../../helpers/styling/sizes";
 import ReceiverService from "../../services/receiver";
 import {CareReceiver} from "../../models/careReceiver";
+import market from "../../assets/Market.png";
 
 interface ReceiverHomeProps extends RouteComponentProps {
   user: User;
@@ -19,6 +20,13 @@ const useStyles = makeStyles((theme) => ({
     textDecoration: "none",
     color: "inherit",
   },
+  emptyList: {
+    height: size(8),
+    display: 'flex',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    flexDirection: 'column'
+  }
 }));
 
 const ReceiverHome: React.FC<ReceiverHomeProps> = ({ user }) => {
@@ -40,11 +48,23 @@ const ReceiverHome: React.FC<ReceiverHomeProps> = ({ user }) => {
         </Typography>
       </div>
       <div>
-        <Button variant="contained" color="primary">
-          <Link className={classes.link} state={careReceiver} to="/create">
-            Nouvelle commande
-          </Link>
-        </Button>
+        {careReceiver.orders?.length ? (
+          <div>blah</div>
+        ) : (
+          <div className={classes.emptyList}>
+            <img src={market} alt="" />
+            <Typography variant="subtitle1">
+              {" "}
+              C'est votre première fois avec Robert ? Passons ensemble cette
+              première commande !
+            </Typography>
+            <Button variant="contained" color="primary">
+              <Link className={classes.link} state={careReceiver} to="/create">
+                Nouvelle commande
+              </Link>
+            </Button>
+          </div>
+        )}
       </div>
     </div>
   );

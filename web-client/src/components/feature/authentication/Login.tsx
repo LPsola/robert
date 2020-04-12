@@ -62,6 +62,7 @@ const Login: React.FC<LoginProps> = ({ setLoggedInUser }) => {
           required
           label="Username"
           name="username"
+          variant="filled"
           value={userForm.username}
           onChange={handleFormValueChange}
         />
@@ -70,6 +71,7 @@ const Login: React.FC<LoginProps> = ({ setLoggedInUser }) => {
           label="Password"
           type="password"
           name="password"
+          variant="filled"
           autoComplete="current-password"
           onChange={handleFormValueChange}
         />

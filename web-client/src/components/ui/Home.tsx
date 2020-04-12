@@ -11,7 +11,6 @@ interface HomeProps extends RouteComponentProps {
 }
 
 const Home: React.FC<HomeProps> = ({ loggedUser }) => {
-  console.log(loggedUser);
   return (
     <div>
       {loggedUser.id ? (

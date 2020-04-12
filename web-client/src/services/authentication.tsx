@@ -1,5 +1,6 @@
 import axios, {AxiosInstance} from "axios";
 import {User} from "../models";
+import {Address} from "../models/address";
 
 class AuthService {
   http: AxiosInstance;
@@ -30,6 +31,14 @@ class AuthService {
     return this.http.get("/getLoggedUser").then((response) => {
       return new User(response.data);
     });
+  }
+
+  confirmAddress(userId: string, address: Address): Promise<Address> {
+    return this.http
+      .post("/confirm-address", { id: userId, address })
+      .then((response) => {
+        return new Address(response.data.address);
+      });
   }
 }
 
