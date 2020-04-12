@@ -40,9 +40,8 @@ router.post("/login", (req, res, next) => {
 router.post("/signup", (req, res, next) => {
   const user = req.body.user;
   const username = user.username;
-  const careReceiverId = null
-  const careGiverId = null
-
+  const careReceiverId = null;
+  const careGiverId = null;
 
   if (!user.username || !user.password || !user.firstName || !user.lastName) {
     res.status(400).json({ message: "Provide username and password" });
@@ -69,8 +68,8 @@ router.post("/signup", (req, res, next) => {
       return;
     }
 
-    if(user.role === 'CARE_RECEIVER'){
-      const careReceiver = new CareReceiver()
+    if (user.role === "CARE_RECEIVER") {
+      const careReceiver = new CareReceiver();
       careReceiver.save(function (err) {
         if (err) {
           res.send(err);
@@ -82,8 +81,8 @@ router.post("/signup", (req, res, next) => {
         newuser.save((err) => {
           if (err) {
             res
-                .status(400)
-                .json({ message: "Saving user to database went wrong." });
+              .status(400)
+              .json({ message: "Saving user to database went wrong." });
             return;
           }
 
@@ -101,9 +100,8 @@ router.post("/signup", (req, res, next) => {
           });
         });
       });
-    }
-    else {
-      const careGiver = new CareGiver()
+    } else {
+      const careGiver = new CareGiver();
       careGiver.save(function (err) {
         if (err) {
           res.send(err);
@@ -115,8 +113,8 @@ router.post("/signup", (req, res, next) => {
         newuser.save((err) => {
           if (err) {
             res
-                .status(400)
-                .json({ message: "Saving user to database went wrong." });
+              .status(400)
+              .json({ message: "Saving user to database went wrong." });
             return;
           }
 
@@ -138,37 +136,19 @@ router.post("/signup", (req, res, next) => {
   });
 });
 
-
-router.post("/confirm", (req, res, next) => {
-  User.findById(req.body.id, function (err, user) {
-    if (err) {
-      res.status(404).json({ message: "User not find" });
-    } else {
-      //Create CareRceiver according user connected
-      var careReceiver = new CareReceiver();
-      careReceiver.vulnerability = req.body.vulnerability;
-
-      //Nous stockons l'objet en base
-      careReceiver.save(function (err) {
-        if (err) {
-          res.send(err);
-        }
-        //Update user with address information
-        let address = {
-          city: req.body.city,
-          street: req.body.street,
-          streetNumber: req.body.street_number,
-          country: req.body.country,
-          latitude: req.body.latitude,
-          longitude: req.body.longitude,
-        };
-
-        user.address = address;
-        user.careReceiverId = careReceiver.id;
-        res.status(200).json({ message: user });
-      });
+router.post("/confirm-address", (req, res, next) => {
+  User.findByIdAndUpdate(
+    req.body.id,
+    { address: req.body.address },
+    { new: true },
+    function (err, address) {
+      if (err) {
+        res.status(404).json({ message: "User not find" });
+      } else {
+        res.status(200).json(address);
+      }
     }
-  });
+  );
 });
 
 router.post("/logout", (req, res) => {
