@@ -16,4 +16,14 @@ router.get("/:id", (req, res) => {
     });
 });
 
+//Get CareReceiver Order Details
+router.get("/order/:orderId", (req, res) => {
+  CareReceiver.findById(req.params.orderId)
+      .populate("orders")
+      .then((response) => {
+        res.json(response);
+      });
+});
+
+
 module.exports = router;

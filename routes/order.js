@@ -8,21 +8,18 @@ const Order = require("../models/Order");
 // Bcrypt to encrypt passwords
 const bcrypt = require("bcrypt");
 
-//List orders
-router.get('/', (req, res, next) => {
-    Order.find(function(err, orders){
-        if (err){
-            res.status(404).json({ message: 'Impossible to load orders' });
-        }
-        res.status(200).json({ message: orders });
-    });
+//Get CareReceiver orders list
+router.get("/", (req, res) => {
+    CareReceiver.find()
+        .populate("orders")
+        .then((response) => {
+            res.json(response);
+        });
 });
 
 //Create Order
 router.post('/', (req, res, next) => {
-    var order = new Order();
- /*   order.preferredMethod = req.body.type;
-    order.status = req.body.status;*/
+    var order = new Order(req.body.order);
     order.save(function(err){
         if(err){
             res.status(200).json({ message: 'Error during order creation' });

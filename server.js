@@ -54,9 +54,11 @@ app.use(cors({
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/user');
 const orderRoutes = require('./routes/order');
+const giverRoutes = require('./routes/giver');
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/orders', orderRoutes);
+app.use('/api/giver', giverRoutes);
 
 const receiverRoutes = require('./routes/receiver');
 app.use('/api/receiver', receiverRoutes);
