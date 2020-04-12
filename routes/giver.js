@@ -10,7 +10,7 @@ const bcrypt = require("bcrypt");
 
 //Get CareGiver orders list
 router.get("/", (req, res) => {
-    CareGiver.find()
+    CareGiver.find({})
         .populate("orders")
         .then((response) => {
             res.json(response);
