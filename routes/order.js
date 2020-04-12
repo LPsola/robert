@@ -8,7 +8,7 @@ const Order = require("../models/Order");
 // Bcrypt to encrypt passwords
 const bcrypt = require("bcrypt");
 
-//List users
+//List orders
 router.get('/', (req, res, next) => {
     Order.find(function(err, orders){
         if (err){
@@ -17,18 +17,18 @@ router.get('/', (req, res, next) => {
         res.status(200).json({ message: orders });
     });
 });
+
+//Create Order
 router.post('/', (req, res, next) => {
     var order = new Order();
-   /* order.nom = req.body.nom;
-    order.adresse = req.body.adresse;
-    order.tel = req.body.tel;
-    order.description = req.body.description;
+ /*   order.preferredMethod = req.body.type;
+    order.status = req.body.status;*/
     order.save(function(err){
         if(err){
             res.status(200).json({ message: 'Error during order creation' });
         }
         res.status(404).json({ message: 'Order created' });
-    });*/
+    });
     res.status(404).json({ message: order });
 });
 
