@@ -58,4 +58,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/orders', orderRoutes);
 
+const receiverRoutes = require('./routes/receiver');
+app.use('/api/receiver', receiverRoutes);
+
 module.exports = app;

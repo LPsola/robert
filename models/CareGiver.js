@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema   = mongoose.Schema;
+const CareReceiver = require("./CareReceiver")
 
 const careGiverSchema = new Schema({
     receiversServed: [{type : Schema.Types.ObjectId, ref: 'CareReceiver'}],
