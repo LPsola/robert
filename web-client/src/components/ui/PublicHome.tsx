@@ -4,6 +4,7 @@ import {makeStyles} from "@material-ui/core/styles";
 import {size} from "../../helpers/styling/sizes";
 import robert from "../../assets/Robert_freetime.png";
 import maria from "../../assets/Maria.png";
+import all from "../../assets/all.png";
 import {Button, Card, CardActions, CardHeader} from "@material-ui/core";
 // @ts-ignore
 import {UserRole} from "../../models/userRole";
@@ -31,7 +32,7 @@ const useStyles = makeStyles(() => ({
   },
   body: {
     display: "flex",
-    justifyContent: "space-between",
+    justifyContent: "space-evenly",
   },
   link: {
     textDecoration: "none",
@@ -70,7 +71,7 @@ const PublicHome: React.FC = () => {
 
           <Card className={classes.card}>
             <CardHeader title="J'ai besoin d'aide" />
-            <img className={classes.persona} src={maria} alt="" />
+            <img className={classes.persona} src={all} alt="" />
             <CardActions>
               <Button
                 className={classes.action}

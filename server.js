@@ -51,10 +51,13 @@ app.use(cors({
   origin: ['http://localhost:3000']
 }));
 
-const authRoutes = require('./routes/auth');
-const userRoutes = require('./routes/user');
-const orderRoutes = require('./routes/order');
-const giverRoutes = require('./routes/giver');
+
+asdfasdfasdgf
+
+// const authRoutes = require('./routes/auth');
+// const userRoutes = require('./routes/user');
+// const orderRoutes = require('./routes/order');
+// const giverRoutes = require('./routes/giver');
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/orders', orderRoutes);
