@@ -1,11 +1,10 @@
 import {PreferredOrderMethod} from "./preferredOrderMethod";
 import {OrderStatus} from "./orderStatus";
-import {Ingredient} from "./ingredient";
 
 export class Order {
   preferredMethod: PreferredOrderMethod;
-  status: OrderStatus;
-  ingredientList: Ingredient[];
+  status: OrderStatus = OrderStatus.OPEN;
+  ingredientList: string[];
   groceryListImage: string;
   recording: string;
   receiptImage: string;
@@ -18,7 +17,7 @@ export class Order {
   constructor(order?: Partial<Order>) {
     if (order) {
       this.preferredMethod = order.preferredMethod!;
-      this.status = order.status!;
+      this.status = order.status || this.status;
       this.ingredientList = order.ingredientList!;
       this.groceryListImage = order.groceryListImage!;
       this.recording = order.recording!;

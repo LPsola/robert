@@ -15,7 +15,7 @@ const orderSchema = new Schema({
     type: String,
     enum: ["OPEN", "IN_PROGRESS", "DELIVERED", "CANCELLED", "DELETED"],
   },
-  ingredientList: [ingredientSchema],
+  ingredientList: [String],
   groceryListImage: String, // cloudinary? config a faire. Ici cette image concerne a la liste demandée par le careReceiver
   recording: String,
   receiptImage: String, //cloudinary? config a faire. Ici cette image concernerait pourquoi pas une photo du recu de courses par le careGiver
